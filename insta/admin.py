@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Post
+from .models import Post, Comment, Tag
 
 
 @admin.register(Post)
@@ -11,10 +11,19 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ['created_at','is_public']
     search_fields = ['message']
 
-    def photo_tag(self,post):
+    def photo_tag(self, post):
         if post.photo:
             return mark_safe(f'<img src="{post.photo.url}" style ="width:72px" />')
         return None
 
     # def message_length(self, post):
     #     return len(post.message)
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    pass
